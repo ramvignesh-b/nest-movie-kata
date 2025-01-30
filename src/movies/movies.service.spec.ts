@@ -94,4 +94,24 @@ describe('MoviesService', () => {
     );
     expect(profitability).toBe('NONPROFITABLE');
   });
+
+  it('returns BLOCKBUSTER when (made - budget) > 100', async () => {
+    mockHttpService.get.mockReturnValueOnce(
+      of({
+        data: {
+          data: {
+            meta: { name: 'blockbuster-movie', released: '2020-01-01' },
+            stats: { budget: 100, made: 300 },
+          },
+        },
+      }),
+    );
+    const profitability = await service.getProfitability('blockbuster-movie');
+
+    expect(mockHttpService.get).toHaveBeenCalledWith(
+      'http://localhost:3002/blockbuster-movie',
+    );
+    expect(profitability).toBe('BLOCKBUSTER');
+  });
 });
+
