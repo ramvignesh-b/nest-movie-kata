@@ -7,6 +7,7 @@ describe('MoviesController', () => {
   let controller: MoviesController;
   const mockMoviesService = {
     getOldness: vi.fn().mockResolvedValue('OLD'),
+    getProfitability: vi.fn().mockResolvedValue('PROFITABLE'),
   };
 
   beforeEach(async () => {
@@ -24,6 +25,17 @@ describe('MoviesController', () => {
     expect(mockMoviesService.getOldness).toHaveBeenCalledWith('old-movie');
     expect(result).toEqual({
       category: 'OLD',
+    });
+  });
+
+  it('returns { revenue: "PROFITABLE" }', async () => {
+    const result = await controller.getProfitability('profitable-movie');
+
+    expect(mockMoviesService.getProfitability).toHaveBeenCalledWith(
+      'profitable-movie',
+    );
+    expect(result).toEqual({
+      revenue: 'PROFITABLE',
     });
   });
 });
