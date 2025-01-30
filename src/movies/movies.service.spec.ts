@@ -75,4 +75,23 @@ describe('MoviesService', () => {
     );
     expect(profitability).toBe('PROFITABLE');
   });
+
+  it('returns NONPROFITABLE when made <= budget', async () => {
+    mockHttpService.get.mockReturnValueOnce(
+      of({
+        data: {
+          data: {
+            meta: { name: 'nonprofitable-movie', released: '2020-01-01' },
+            stats: { budget: 200, made: 150 },
+          },
+        },
+      }),
+    );
+    const profitability = await service.getProfitability('nonprofitable-movie');
+
+    expect(mockHttpService.get).toHaveBeenCalledWith(
+      'http://localhost:3002/nonprofitable-movie',
+    );
+    expect(profitability).toBe('NONPROFITABLE');
+  });
 });
