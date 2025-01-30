@@ -9,7 +9,7 @@ import { describe, it, beforeAll, afterAll } from 'vitest';
 const server = setupServer(
   http.get('http://localhost:3002/new-movie', () => {
     return HttpResponse.json({
-      data: { meta: { released: '2020-01-01' } }
+      data: { meta: { released: '2020-01-01' } },
     });
   }),
 );

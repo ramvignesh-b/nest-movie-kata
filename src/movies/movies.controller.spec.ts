@@ -20,7 +20,7 @@ describe('MoviesController', () => {
 
   it('returns { category: "OLD" }', async () => {
     const result = await controller.getOldness('old-movie');
-    
+
     expect(mockMoviesService.getOldness).toHaveBeenCalledWith('old-movie');
     expect(result).toEqual({
       category: 'OLD',

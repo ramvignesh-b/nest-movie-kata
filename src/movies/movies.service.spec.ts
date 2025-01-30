@@ -7,7 +7,9 @@ import { describe, it, beforeEach, expect, vi } from 'vitest';
 describe('MoviesService', () => {
   let service: MoviesService;
   const mockHttpService = {
-    get: vi.fn(() => of({ data: { data: { meta: { released: '2020-01-01' } } } })),
+    get: vi.fn(() =>
+      of({ data: { data: { meta: { released: '2020-01-01' } } } }),
+    ),
   };
 
   beforeEach(async () => {
@@ -24,7 +26,9 @@ describe('MoviesService', () => {
   it('returns NEW for year >= 2000', async () => {
     const oldness = await service.getOldness('new-movie');
 
-    expect(mockHttpService.get).toHaveBeenCalledWith('http://localhost:3002/new-movie');
+    expect(mockHttpService.get).toHaveBeenCalledWith(
+      'http://localhost:3002/new-movie',
+    );
     expect(oldness).toBe('NEW');
   });
 
@@ -35,7 +39,9 @@ describe('MoviesService', () => {
 
     const oldness = await service.getOldness('90s-movie');
 
-    expect(mockHttpService.get).toHaveBeenCalledWith('http://localhost:3002/90s-movie');
+    expect(mockHttpService.get).toHaveBeenCalledWith(
+      'http://localhost:3002/90s-movie',
+    );
     expect(oldness).toBe('90s');
   });
 
@@ -45,7 +51,9 @@ describe('MoviesService', () => {
     );
     const oldness = await service.getOldness('old-movie');
 
-    expect(mockHttpService.get).toHaveBeenCalledWith('http://localhost:3002/old-movie');
+    expect(mockHttpService.get).toHaveBeenCalledWith(
+      'http://localhost:3002/old-movie',
+    );
     expect(oldness).toBe('OLD');
   });
 });

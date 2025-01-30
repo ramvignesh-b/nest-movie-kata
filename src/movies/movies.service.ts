@@ -25,16 +25,18 @@ export class MoviesService {
 
   async getOldness(movieName: string): Promise<MovieAge> {
     const response = await firstValueFrom(
-    this.httpService.get<MovieResponse>(`${this.baseUrl}/${movieName}`),
-      );
+      this.httpService.get<MovieResponse>(`${this.baseUrl}/${movieName}`),
+    );
 
-      const year = this.parseYear(response.data.data.meta.released);
-      return this.getOldnessFromYear(year);
+    const year = this.parseYear(response.data.data.meta.released);
+    return this.getOldnessFromYear(year);
   }
 
   private getOldnessFromYear(year: number): MovieAge {
-      const category = this.ageCategories.find(category => category.matches(year));
-      return category?.name ?? 'OLD';
+    const category = this.ageCategories.find((category) =>
+      category.matches(year),
+    );
+    return category?.name ?? 'OLD';
   }
 
   private parseYear(releaseDate: string): number {
