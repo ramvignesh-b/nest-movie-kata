@@ -6,8 +6,10 @@ import { firstValueFrom } from 'rxjs';
 export class MoviesService {
   constructor(private readonly httpService: HttpService) {}
 
+  private readonly baseUrl = 'http://localhost:3002';
+
   async getOldness(movieName: string): Promise<string> {
-    const response = await firstValueFrom(this.httpService.get(`http://localhost:3002/${movieName}`));
+    const response = await firstValueFrom(this.httpService.get(`${this.baseUrl}/${movieName}`));
     return 'NEW';
   }
 }
