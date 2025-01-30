@@ -4,7 +4,7 @@ Create a movie DB API that consumes another API (mock API) and transforms it's r
 
 ### Requirements
 
-- [ ] Create an endpoint `/:movieName/oldness` which should return values `NEW|90s|OLD` based on the release date of the movie.
+- [X] Create an endpoint `/:movieName/oldness` which should return values `NEW|90s|OLD` based on the release date of the movie.
   - Year >= 2000 : NEW
   - Year >= 90 : 90s
   - Year < 90 : OLD
