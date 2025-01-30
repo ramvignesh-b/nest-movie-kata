@@ -10,4 +10,10 @@ export class MoviesController {
     const oldness = await this.moviesService.getOldness(movieName);
     return { category: oldness };
   }
+
+  @Get(':movieName/profitable')
+  async getProfitability(@Param('movieName') movieName: string) {
+    const profitability = await this.moviesService.getProfitability(movieName);
+    return { revenue: profitability };
+  }
 }
