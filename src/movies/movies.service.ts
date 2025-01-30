@@ -12,7 +12,18 @@ export class MoviesService {
     const response = await firstValueFrom(
       this.httpService.get(`${this.baseUrl}/${movieName}`),
     );
-    const year = new Date(response.data.data.meta.released).getFullYear();
-    return year >= 2000 ? 'NEW' : '90s';
+    const year = this.parseYear(response.data.data.meta.released);
+    return this.getOldnessFromYear(year);
+  }
+
+  private getOldnessFromYear(year: number): string {
+    if (year >= 2000) {
+      return 'NEW';
+    }
+    return '90s';
+  }
+
+  private parseYear(releaseDate: string): number {
+    return new Date(releaseDate).getFullYear();
   }
 }
