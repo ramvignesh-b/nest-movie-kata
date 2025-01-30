@@ -1,7 +1,12 @@
 export interface MovieResponse {
   data: {
     meta: {
+      name?: string;
       released: string;
+    };
+    stats?: {
+      budget: number;
+      made: number;
     };
   };
 }
