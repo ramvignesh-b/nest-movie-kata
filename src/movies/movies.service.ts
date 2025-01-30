@@ -43,4 +43,12 @@ export class MoviesService {
     const date = new Date(releaseDate);
     return date.getFullYear();
   }
+
+  async getProfitability(movieName: string): Promise<string> {
+    const response = await firstValueFrom(
+      this.httpService.get<MovieResponse>(`${this.baseUrl}/${movieName}`),
+    );
+
+    return 'PROFITABLE';
+  }
 }
