@@ -63,7 +63,7 @@ describe('MoviesService', () => {
         data: {
           data: {
             meta: { name: 'profitable-movie', released: '2020-01-01' },
-            stats: { budget: 100, made: 500 },
+            stats: { budget: 100, made: 150 },
           },
         },
       }),
