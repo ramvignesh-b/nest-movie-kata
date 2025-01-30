@@ -54,6 +54,10 @@ export class MoviesService {
   }
 
   private calculateProfitability(budget: number, made: number): string {
+    const profit = made - budget;
+    if (profit > 100) {
+      return 'BLOCKBUSTER';
+    }
     return made > budget ? 'PROFITABLE' : 'NONPROFITABLE';
   }
 }
