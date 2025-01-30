@@ -8,6 +8,7 @@ describe('MoviesController', () => {
   const mockMoviesService = {
     getOldness: vi.fn().mockResolvedValue('OLD'),
     getProfitability: vi.fn().mockResolvedValue('PROFITABLE'),
+    getRating: vi.fn().mockResolvedValue(4),
   };
 
   beforeEach(async () => {
@@ -36,6 +37,15 @@ describe('MoviesController', () => {
     );
     expect(result).toEqual({
       revenue: 'PROFITABLE',
+    });
+  });
+
+  it('returns { rating: 4 }', async () => {
+    const result = await controller.getRating('high-rated-movie');
+
+    expect(mockMoviesService.getRating).toHaveBeenCalledWith('high-rated-movie');
+    expect(result).toEqual({
+      rating: 4,
     });
   });
 });
