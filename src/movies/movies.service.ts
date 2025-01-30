@@ -19,8 +19,10 @@ export class MoviesService {
   private getOldnessFromYear(year: number): string {
     if (year >= 2000) {
       return 'NEW';
+    } else if (year >= 1990) {
+      return '90s';
     }
-    return '90s';
+    return 'OLD';
   }
 
   private parseYear(releaseDate: string): number {
