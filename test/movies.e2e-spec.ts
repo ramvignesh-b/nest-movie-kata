@@ -55,4 +55,19 @@ describe('MoviesController (e2e)', () => {
       .expect(200)
       .expect({ revenue: 'PROFITABLE' });
   });
+
+  server.use(
+    http.get('http://localhost:3002/high-rated-movie', () => {
+      return HttpResponse.json({
+        data: { meta: { name: 'High Rated' }, stats: { budget: 100, made: 300, rating: 8 } },
+      });
+    }),
+  );
+
+  it('GET /movies/high-rated-movie/rating → returns 4', async () => {
+    await request(app.getHttpServer())
+      .get('/movies/high-rated-movie/rating')
+      .expect(200)
+      .expect({ rating: 4 });
+  });
 });
