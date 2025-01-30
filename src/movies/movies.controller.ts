@@ -16,4 +16,10 @@ export class MoviesController {
     const profitability = await this.moviesService.getProfitability(movieName);
     return { revenue: profitability };
   }
+
+  @Get(':movieName/rating')
+  async getRating(@Param('movieName') movieName: string) {
+    const rating = await this.moviesService.getRating(movieName);
+    return { rating };
+  }
 }
