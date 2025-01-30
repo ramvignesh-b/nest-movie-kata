@@ -1,13 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MoviesService } from './movies.service';
 import { HttpService } from '@nestjs/axios';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { describe, it, beforeEach, expect, vi } from 'vitest';
 
 describe('MoviesService', () => {
   let service: MoviesService;
   const mockHttpService = {
-    get: vi.fn((): Observable<MovieResponse> =>
+    get: vi.fn(() =>
       of({ data: { data: { meta: { released: '2020-01-01' } } } }),
     ),
   };
@@ -57,13 +57,14 @@ describe('MoviesService', () => {
     expect(oldness).toBe('OLD');
   });
 
-
   it('returns PROFITABLE when made > budget', async () => {
     mockHttpService.get.mockReturnValueOnce(
       of({
         data: {
-          meta: { name: 'profitable-movie' },
-          stats: { budget: 100, made: 500 },
+          data: {
+            meta: { name: 'profitable-movie', released: '2020-01-01' },
+            stats: { budget: 100, made: 500 },
+          },
         },
       }),
     );
