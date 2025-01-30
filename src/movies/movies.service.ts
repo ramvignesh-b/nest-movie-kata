@@ -9,7 +9,10 @@ export class MoviesService {
   private readonly baseUrl = 'http://localhost:3002';
 
   async getOldness(movieName: string): Promise<string> {
-    const response = await firstValueFrom(this.httpService.get(`${this.baseUrl}/${movieName}`));
-    return 'NEW';
+    const response = await firstValueFrom(
+      this.httpService.get(`${this.baseUrl}/${movieName}`),
+    );
+    const year = new Date(response.data.data.meta.released).getFullYear();
+    return year >= 2000 ? 'NEW' : '90s';
   }
 }
