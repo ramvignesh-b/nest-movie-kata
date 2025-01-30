@@ -38,4 +38,14 @@ describe('MoviesService', () => {
     expect(mockHttpService.get).toHaveBeenCalledWith('http://localhost:3002/90s-movie');
     expect(oldness).toBe('90s');
   });
+
+  it('returns OLD for year < 1990', async () => {
+    mockHttpService.get.mockReturnValueOnce(
+      of({ data: { data: { meta: { released: '1985-01-01' } } } }),
+    );
+    const oldness = await service.getOldness('old-movie');
+
+    expect(mockHttpService.get).toHaveBeenCalledWith('http://localhost:3002/old-movie');
+    expect(oldness).toBe('OLD');
+  });
 });
