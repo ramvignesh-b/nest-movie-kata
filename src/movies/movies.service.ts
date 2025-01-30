@@ -49,9 +49,11 @@ export class MoviesService {
       this.httpService.get<MovieResponse>(`${this.baseUrl}/${movieName}`),
     );
 
-    const budget = response.data.data.stats.budget;
-    const made = response.data.data.stats.made;
+    const { budget, made } = response.data.data.stats;
+    return this.calculateProfitability(budget, made);
+  }
 
+  private calculateProfitability(budget: number, made: number): string {
     return made > budget ? 'PROFITABLE' : 'NONPROFITABLE';
   }
 }

@@ -4,7 +4,7 @@ export interface MovieResponse {
       name?: string;
       released: string;
     };
-    stats?: {
+    stats: {
       budget: number;
       made: number;
     };
