@@ -21,6 +21,21 @@ export class MoviesService {
     },
   ];
 
+  private readonly profitCategories = [
+    {
+      name: 'BLOCKBUSTER',
+      matches: (profit: number) => profit > 100,
+    },
+    {
+      name: 'PROFITABLE',
+      matches: (profit: number) => profit > 0,
+    },
+    {
+      name: 'NONPROFITABLE',
+      matches: (profit: number) => profit <= 0,
+    },
+  ] as const;
+
   constructor(private readonly httpService: HttpService) {}
 
   async getOldness(movieName: string): Promise<MovieAge> {
@@ -55,9 +70,9 @@ export class MoviesService {
 
   private calculateProfitability(budget: number, made: number): string {
     const profit = made - budget;
-    if (profit > 100) {
-      return 'BLOCKBUSTER';
-    }
-    return made > budget ? 'PROFITABLE' : 'NONPROFITABLE';
+    const category = this.profitCategories.find(category => 
+      category.matches(profit)
+    );
+    return category?.name ?? 'NONPROFITABLE';
   }
 }
