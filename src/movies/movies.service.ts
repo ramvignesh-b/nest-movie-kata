@@ -49,6 +49,9 @@ export class MoviesService {
       this.httpService.get<MovieResponse>(`${this.baseUrl}/${movieName}`),
     );
 
-    return 'PROFITABLE';
+    const budget = response.data.data.stats.budget;
+    const made = response.data.data.stats.made;
+
+    return made > budget ? 'PROFITABLE' : 'NONPROFITABLE';
   }
 }
