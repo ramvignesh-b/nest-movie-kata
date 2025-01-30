@@ -38,13 +38,12 @@ describe('MoviesController (e2e)', () => {
       .expect({ category: 'NEW' });
   });
 
-
   server.use(
     http.get('http://localhost:3002/profitable-movie', () => {
       return HttpResponse.json({
         data: {
           meta: { name: 'profitable-movie' },
-          stats: { budget: 100, made: 500 },
+          stats: { budget: 100, made: 120 },
         },
       });
     }),
