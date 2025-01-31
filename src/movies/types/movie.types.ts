@@ -7,6 +7,7 @@ export interface MovieResponse {
     stats: {
       budget: number;
       made: number;
+      rating: number;
     };
   };
 }

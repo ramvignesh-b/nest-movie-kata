@@ -75,4 +75,12 @@ export class MoviesService {
     );
     return category?.name ?? 'NONPROFITABLE';
   }
+
+  async getRating(movieName: string): Promise<number> {
+    const response = await firstValueFrom(
+      this.httpService.get<MovieResponse>(`${this.baseUrl}/${movieName}`),
+    );
+    const { rating } = response.data.data.stats;
+    return rating / 2;
+  }
 }
