@@ -81,6 +81,10 @@ export class MoviesService {
       this.httpService.get<MovieResponse>(`${this.baseUrl}/${movieName}`),
     );
     const { rating } = response.data.data.stats;
-    return rating / 2;
+    return this.ratingOutOfFive(rating);
+  }
+
+  private ratingOutOfFive(ratingOutofTen: number): number {
+    return ratingOutofTen / 2;
   }
 }
