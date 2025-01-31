@@ -113,5 +113,24 @@ describe('MoviesService', () => {
     );
     expect(profitability).toBe('BLOCKBUSTER');
   });
+
+  it('returns rating out of 5', async () => {
+    mockHttpService.get.mockReturnValueOnce(
+      of({
+        data: {
+          data: {
+            meta: { name: 'High Rated', released: '2020-01-01' },
+            stats: { rating: 8 },
+          },
+        },
+      }),
+    );
+    const rating = await service.getRating('high-rated-movie');
+
+    expect(mockHttpService.get).toHaveBeenCalledWith(
+      'http://localhost:3002/high-rated-movie',
+    );
+    expect(rating).toBe(4);
+  });
 });
 
