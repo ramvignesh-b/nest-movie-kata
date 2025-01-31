@@ -132,5 +132,13 @@ describe('MoviesService', () => {
     );
     expect(rating).toBe(4);
   });
+
+  it('returns a decimal rating (1 precision) out of 5', async () => {
+    mockHttpService.get.mockReturnValueOnce(
+      of({ data: { data: { meta: { name: 'High Rated', released: '2020-01-01' }, stats: { rating: 9.1 } } } }),
+    );
+    const rating = await service.getRating('high-rated-movie');
+    expect(rating).toBe(4.6);
+  });
 });
 
