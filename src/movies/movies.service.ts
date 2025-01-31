@@ -85,6 +85,6 @@ export class MoviesService {
   }
 
   private ratingOutOfFive(ratingOutofTen: number): number {
-    return ratingOutofTen / 2;
+    return Math.round(ratingOutofTen / 2 * 10) / 10;
   }
 }
